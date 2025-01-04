@@ -1,5 +1,6 @@
 <html>
     <head>
+        <title>Pomodoro</title>
         <style>
            .abc{
             display: inline-block;
@@ -12,12 +13,12 @@
            #d1{
             text-align:center;
             border: 5px solid rgb(215, 210, 210);
-            
+            margin-left: 30%;
             border-radius: 30%;
             width: 500px;
             height: 500px;
             margin-top: 50px;
-            margin-left: 500px;
+         
             background-color: rgb(243, 22, 22);
            }
            #main{
@@ -49,10 +50,12 @@
             font-size: large;
             color: antiquewhite;
             font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            
            }
+           
         </style>
     </head>
-    <body style="background-color: rgb(220, 107, 122);">
+    <body id="body" style="background-color: rgb(220, 107, 122);">
         <div id="d1">
         <h1 id="main">Pomodoro</h1>
         <div id="opt"> 
@@ -166,18 +169,30 @@
 
             }
              function sb(){
+                 var clr = document.getElementById("body")
+                 var clr1 = document.getElementById("d1")
+                 clr.style.backgroundColor = "  rgb(95, 108, 171)"
+                 clr1.style.backgroundColor = "  rgb(31, 54, 167)"
                 document.getElementById("select").innerHTML = 'Short Break'
                  document.getElementById("h1").innerHTML = 5
                  document.getElementById("h3").innerHTML = '00'
                  
              }
              function pm(){
+                var clr4 = document.getElementById("body")
+                 var clr5 = document.getElementById("d1")
+                 clr4.style.backgroundColor = "  rgb(220, 107, 122) "
+                 clr5.style.backgroundColor = "rgb(243, 22, 22)"
                 document.getElementById("select").innerHTML = 'Pomodoro'
                  document.getElementById("h1").innerHTML = 25
                  document.getElementById("h3").innerHTML = "00"
                  
              }
              function lb(){
+                var clr2 = document.getElementById("body")
+                 var clr3 = document.getElementById("d1")
+                 clr2.style.backgroundColor = "  rgb(104, 215, 104) "
+                 clr3.style.backgroundColor = "rgb(23, 155, 21)"
                 document.getElementById("select").innerHTML = 'Long Break'
                  document.getElementById("h1").innerHTML = 15
                  document.getElementById("h3").innerHTML = "00"
