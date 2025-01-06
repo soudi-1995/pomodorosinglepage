@@ -17,7 +17,6 @@
            #d1{
             text-align:center;
             border: 5px solid rgb(215, 210, 210);
-            /* margin-left: 30%; */
             border-radius: 30%;
             width: 500px;
             height: 500px;
@@ -78,30 +77,54 @@
         <button  class="btn" id="b2" onclick="ps()">Pause</button>
         <button class="btn" id="b3" onclick="rst()">Reset</button>
     </div>
-        <script>
-             var a;
-             var b ;
-           function abc(){
+    <script>
+        var a; 
+        var b; 
+        var timerRunning = false; // **(Highlighted in yellow)** Add a flag to prevent multiple timers from starting
+    
+        function abc() {
+            if (timerRunning) return; // **(Highlighted in yellow)** Prevent starting the timer multiple times
+            timerRunning = true; // **(Highlighted in yellow)** Set the flag to true
+    
+            a = setInterval(function () {
+                var sec = document.getElementById("h3").innerHTML;
+                var min = document.getElementById("h1").innerHTML;
+    
+                if (sec == 0) {
+                    if (min == 0) {
+                        clearInterval(a);
+                        clearInterval(b);
+                        timerRunning = false; // **(Highlighted in yellow)** Reset the flag when the timer ends
+                        alert("Time's Up");
+
+                        var selected = document.getElementById("select").innerHTML;
+                if (selected === "Pomodoro") {
+                    document.getElementById("h1").innerHTML = 25;
+                    document.getElementById("h3").innerHTML = "00";
+                }
+                if (selected === "Short Break") {
+                    document.getElementById("h1").innerHTML = 5;
+                    document.getElementById("h3").innerHTML = "00";
+                }
+                if (selected === "Long Break") {
+                    document.getElementById("h1").innerHTML = 15;
+                    document.getElementById("h3").innerHTML = "00";
+                }
+                return; // Exit the function to prevent further countdown
             
-                a = setInterval(function(){
+                        
+                    }
 
-             var sec = document.getElementById("h3").innerHTML
-            var min = document.getElementById("h1").innerHTML
                 
-                if(sec == 0){
-                     if(min == 0){
-                        clearInterval(a)
-                        clearInterval(b)
-                        alert("Time's Up")
+                    sec = 60;
+                    min-- ; 
+                    document.getElementById("h1").innerHTML = min;
+                }
+                sec--;
+                document.getElementById("h3").innerHTML = sec;
+            }, 1000);
 
-                     }
-                    sec = 60
-                } 
-                sec--
-                document.getElementById("h3").innerHTML = sec
-            },1000)
-
-                setTimeout(function(){
+            setTimeout(function(){
                 
                 if(document.getElementById("h1").innerHTML == 25){
                 document.getElementById("h1").innerHTML =24
@@ -121,87 +144,81 @@
                 document.getElementById("h1").innerHTML = 14
                }
             },1000)
-
-
-              setTimeout(function(){
-                
-                if(document.getElementById("h1").innerHTML == 5){
-                document.getElementById("h3").innerHTML =4
-                clearInterval(a)
-                clearInterval(b)
-               }
-            },1000)
-           
-                b = setInterval(function(){
-                var min = document.getElementById("h1").innerHTML
-                        
-                 min--
-                document.getElementById("h1").innerHTML = min
-            },60000)
-                    
-          
-            }
-                     
-            function rst(){
-                clearInterval(a);
-                clearInterval(b);
-                var selected = document.getElementById("select").innerHTML
-                if(selected === "Pomodoro"){
-                document.getElementById("h1").innerHTML = 25
-                document.getElementById("h3").innerHTML = "00"
+    
+            b = setInterval(function () {
+                var min = document.getElementById("h1").innerHTML;
+                if (min >= 0) { // **(Highlighted in yellow)** Avoid decrementing below zero
+                    min--;
+                    document.getElementById("h1").innerHTML = min;
                 }
-
-               
-                if(selected === 'Short Break'){
-                document.getElementById("h1").innerHTML = 5
-                document.getElementById("h3").innerHTML = "00"
-                }
-
-                if(selected === 'Long Break'){
-                document.getElementById("h1").innerHTML = 15
-                document.getElementById("h3").innerHTML = "00"
-                }
-                
+            }, 60000);
+        }
+    
+        function rst() {
+            clearInterval(a);
+            clearInterval(b);
+            timerRunning = false; // **(Highlighted in yellow)** Reset the flag when reset is clicked
+            var selected = document.getElementById("select").innerHTML;
+            if (selected === "Pomodoro") {
+                document.getElementById("h1").innerHTML = 25;
+                document.getElementById("h3").innerHTML = "00";
             }
-
-            function ps(){
-                var c = document.getElementById("h3").innerHTML
-                
-                clearInterval(a)
-                clearInterval(b);
-                document.getElementById("h3").innerHTML = c 
-
+            if (selected === "Short Break") {
+                document.getElementById("h1").innerHTML = 5;
+                document.getElementById("h3").innerHTML = '00';
             }
-             function sb(){
-                 var clr = document.getElementById("body")
-                 var clr1 = document.getElementById("d1")
-                 clr.style.backgroundColor = "  rgb(95, 108, 171)"
-                 clr1.style.backgroundColor = "  rgb(31, 54, 167)"
-                document.getElementById("select").innerHTML = 'Short Break'
-                 document.getElementById("h1").innerHTML = 5
-                 document.getElementById("h3").innerHTML = '00'
-                 
-             }
-             function pm(){
-                var clr4 = document.getElementById("body")
-                 var clr5 = document.getElementById("d1")
-                 clr4.style.backgroundColor = "  rgb(220, 107, 122) "
-                 clr5.style.backgroundColor = "rgb(243, 22, 22)"
-                document.getElementById("select").innerHTML = 'Pomodoro'
-                 document.getElementById("h1").innerHTML = 25
-                 document.getElementById("h3").innerHTML = "00"
-                 
-             }
-             function lb(){
-                var clr2 = document.getElementById("body")
-                 var clr3 = document.getElementById("d1")
-                 clr2.style.backgroundColor = "  rgb(104, 215, 104) "
-                 clr3.style.backgroundColor = "rgb(23, 155, 21)"
-                document.getElementById("select").innerHTML = 'Long Break'
-                 document.getElementById("h1").innerHTML = 15
-                 document.getElementById("h3").innerHTML = "00"
-                 
-             }
+            if (selected === "Long Break") {
+                document.getElementById("h1").innerHTML = 15;
+                document.getElementById("h3").innerHTML = "00";
+            }
+        }
+    
+        function ps() {
+            clearInterval(a);
+            clearInterval(b);
+            timerRunning = false; // **(Highlighted in yellow)** Reset the flag when paused
+        }
+    
+        function sb() {
+            clearInterval(a); // **(Highlighted in yellow)** Stop any running timer when switching modes
+            clearInterval(b); // **(Highlighted in yellow)** Stop any running timer when switching modes
+            timerRunning = false; // **(Highlighted in yellow)** Reset the flag when switching modes
+            var clr = document.getElementById("body");
+            var clr1 = document.getElementById("d1");
+            clr.style.backgroundColor = "  rgb(95, 108, 171)";
+            clr1.style.backgroundColor = "  rgb(31, 54, 167)";
+            document.getElementById("select").innerHTML = "Short Break";
+            document.getElementById("h1").innerHTML = 5;
+            document.getElementById("h3").innerHTML = '00';
+        }
+    
+        function pm() {
+            clearInterval(a); // **(Highlighted in yellow)** Stop any running timer when switching modes
+            clearInterval(b); // **(Highlighted in yellow)** Stop any running timer when switching modes
+            timerRunning = false; // **(Highlighted in yellow)** Reset the flag when switching modes
+            var clr4 = document.getElementById("body");
+            var clr5 = document.getElementById("d1");
+            clr4.style.backgroundColor = "  rgb(220, 107, 122) ";
+            clr5.style.backgroundColor = "rgb(243, 22, 22)";
+            document.getElementById("select").innerHTML = "Pomodoro";
+            document.getElementById("h1").innerHTML = 25;
+            document.getElementById("h3").innerHTML = "00";
+        }
+    
+        function lb() {
+            clearInterval(a); // **(Highlighted in yellow)** Stop any running timer when switching modes
+            clearInterval(b); // **(Highlighted in yellow)** Stop any running timer when switching modes
+            timerRunning = false; // **(Highlighted in yellow)** Reset the flag when switching modes
+            var clr2 = document.getElementById("body");
+            var clr3 = document.getElementById("d1");
+            clr2.style.backgroundColor = "  rgb(104, 215, 104) ";
+            clr3.style.backgroundColor = "rgb(23, 155, 21)";
+            document.getElementById("select").innerHTML = "Long Break";
+            document.getElementById("h1").innerHTML = 15;
+            document.getElementById("h3").innerHTML = "00";
+        }
+   
+    
                
         </script>
     </body>
