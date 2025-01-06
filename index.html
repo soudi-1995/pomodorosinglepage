@@ -84,11 +84,10 @@
     <script>
         var a; 
         var b; 
-        var timerRunning = false; // **(Highlighted in yellow)** Add a flag to prevent multiple timers from starting
-    
+        var timerRunning = false; 
         function abc() {
-            if (timerRunning) return; // **(Highlighted in yellow)** Prevent starting the timer multiple times
-            timerRunning = true; // **(Highlighted in yellow)** Set the flag to true
+            if (timerRunning) return; 
+            timerRunning = true; 
     
             a = setInterval(function () {
                 var sec = document.getElementById("h3").innerHTML;
@@ -98,7 +97,7 @@
                     if (min == 0) {
                         clearInterval(a);
                         clearInterval(b);
-                        timerRunning = false; // **(Highlighted in yellow)** Reset the flag when the timer ends
+                        timerRunning = false;
                         alert("Time's Up");
 
                         var selected = document.getElementById("select").innerHTML;
@@ -114,7 +113,7 @@
                     document.getElementById("h1").innerHTML = 15;
                     document.getElementById("h3").innerHTML = "00";
                 }
-                return; // Exit the function to prevent further countdown
+                return; 
             
                         
                     }
@@ -151,7 +150,7 @@
     
             b = setInterval(function () {
                 var min = document.getElementById("h1").innerHTML;
-                if (min >= 0) { // **(Highlighted in yellow)** Avoid decrementing below zero
+                if (min >= 0) { 
                     min--;
                     document.getElementById("h1").innerHTML = min;
                 }
@@ -161,7 +160,7 @@
         function rst() {
             clearInterval(a);
             clearInterval(b);
-            timerRunning = false; // **(Highlighted in yellow)** Reset the flag when reset is clicked
+            timerRunning = false; 
             var selected = document.getElementById("select").innerHTML;
             if (selected === "Pomodoro") {
                 document.getElementById("h1").innerHTML = 25;
@@ -180,13 +179,13 @@
         function ps() {
             clearInterval(a);
             clearInterval(b);
-            timerRunning = false; // **(Highlighted in yellow)** Reset the flag when paused
+            timerRunning = false; 
         }
     
         function sb() {
-            clearInterval(a); // **(Highlighted in yellow)** Stop any running timer when switching modes
-            clearInterval(b); // **(Highlighted in yellow)** Stop any running timer when switching modes
-            timerRunning = false; // **(Highlighted in yellow)** Reset the flag when switching modes
+            clearInterval(a); 
+            clearInterval(b); 
+            timerRunning = false; 
             var clr = document.getElementById("body");
             var clr1 = document.getElementById("d1");
             clr.style.backgroundColor = "  rgb(95, 108, 171)";
@@ -197,9 +196,9 @@
         }
     
         function pm() {
-            clearInterval(a); // **(Highlighted in yellow)** Stop any running timer when switching modes
-            clearInterval(b); // **(Highlighted in yellow)** Stop any running timer when switching modes
-            timerRunning = false; // **(Highlighted in yellow)** Reset the flag when switching modes
+            clearInterval(a); 
+            clearInterval(b); 
+            timerRunning = false; 
             var clr4 = document.getElementById("body");
             var clr5 = document.getElementById("d1");
             clr4.style.backgroundColor = "  rgb(220, 107, 122) ";
@@ -210,9 +209,9 @@
         }
     
         function lb() {
-            clearInterval(a); // **(Highlighted in yellow)** Stop any running timer when switching modes
-            clearInterval(b); // **(Highlighted in yellow)** Stop any running timer when switching modes
-            timerRunning = false; // **(Highlighted in yellow)** Reset the flag when switching modes
+            clearInterval(a); 
+            clearInterval(b); 
+            timerRunning = false; 
             var clr2 = document.getElementById("body");
             var clr3 = document.getElementById("d1");
             clr2.style.backgroundColor = "  rgb(104, 215, 104) ";
